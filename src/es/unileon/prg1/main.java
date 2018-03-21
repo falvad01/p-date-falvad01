@@ -4,7 +4,7 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		Date today = new Date(31,2,2018);
+		Date today = new Date(21,3,2018);
 		
 		System.out.println("La fecha actual es: "+today);
 		System.out.println("¿Estamos en el dia de la fecha introducida?"+today.isSameDay(1));
@@ -13,6 +13,7 @@ public class main {
 		System.out.println(today.isSame(1, 2, 2018));
 		System.out.println("Estamos en "+today.getMonth());
 		System.out.println(today.checkMonth());
+		System.out.println("Estamos en "+today.getSeason());
 
 		
 	}

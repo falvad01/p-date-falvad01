@@ -152,7 +152,7 @@ public class Date {
 		case 9://next
 		case 11:
 			if(this.day<=30 && this.day>0) {
-				corectMonth="El mes es de 0 dias y es correcto";
+				corectMonth="El mes es de 30 dias y es correcto";
 				}else {
 					corectMonth="El mes deberia de tener 30 dias";
 				}
@@ -168,6 +168,63 @@ public class Date {
 				corectMonth="No existe ese mes";
 		}
 		return corectMonth;
+	}
+	
+	public String getSeason() {
+		
+		String season;
+		
+		switch(this.month) {
+		
+		//Primavera
+		case 3:
+			if(this.day>=22) {//Equinocio de privamera
+				season="Primavera";
+			}else {
+				season="Invierno";
+			}
+			break;
+		case 4://next
+		case 5:
+			season="Primavera";
+			break;
+		case 6://next
+			if(this.day<=21) { //Solsticio de verano
+				season="Primavera";
+			}else {
+				season="Verano";
+			}
+			break;
+		case 7://next
+		case 8:
+			season="Verano";
+			break;
+		case 9:
+			if(this.day<=22) { //Equinocio de otoño
+				season="Verano";
+			}else {
+				season="Otoño";
+			}
+			break;
+		case 10://Next
+		case 11:
+			season="Otoño";
+		case 12:
+			if(this.day<=22) { //Solsticio de invierno
+				season="Otoño";
+			}else {
+				season="Invierno";
+			}
+			break;
+		case 1://Next
+		case 2:
+			season="Invierno";
+			break;
+			default:
+				season="Mes introducido incorrectamente";
+				break;	
+		}	
+		return season;
 	}
 	
 	
