@@ -33,6 +33,7 @@ public class Date {
 		StringBuffer output = new StringBuffer();
 		output.append(day+"/"+month+"/"+year);
 		
+
 		return day + "/" + month + "/" + year;
 	}
 	
@@ -126,6 +127,47 @@ public class Date {
 				break;	
 		}
 		return writedMonth;
+	}
+	
+	public String checkMonth() {
+		
+		String corectMonth;
+		
+		switch(this.month) {
+		case 1://next
+		case 3://next
+		case 5://next
+		case 7://next
+		case 8://next
+		case 10://next
+		case 12:
+			if(this.day<=31 && this.day>0) {
+			corectMonth="El mes es de 31 dias y es correcto";
+			}else {
+				corectMonth="El mes deberia de tener 31 dias";
+			}
+			break;
+		case 4://next
+		case 6://next
+		case 9://next
+		case 11:
+			if(this.day<=30 && this.day>0) {
+				corectMonth="El mes es de 0 dias y es correcto";
+				}else {
+					corectMonth="El mes deberia de tener 30 dias";
+				}
+			break;
+		case 2:
+			if(this.day<=28 && this.day>0) {
+				corectMonth="El mes es de 28 dias y es correcto";
+				}else {
+					corectMonth="El mes deberia de tener 28 dias";
+				}
+			break;
+			default:
+				corectMonth="No existe ese mes";
+		}
+		return corectMonth;
 	}
 	
 	
