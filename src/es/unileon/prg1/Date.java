@@ -79,8 +79,7 @@ public class Date {
 			}
 		return outSentence;
 		}
-		
-	public String getMonth() {
+	public String getMonthName() {
 		
 		String writedMonth;
 		
@@ -128,7 +127,96 @@ public class Date {
 		}
 		return writedMonth;
 	}
-	
+		
+	public String getMonth(int i) {
+		
+		String writedMonth;
+		
+		switch(i) {
+		
+		case 1:
+			writedMonth="Enero ";
+			break;
+		case 2:
+			writedMonth="Febrero ";
+			break;
+		case 3:
+			writedMonth="Marzo ";
+			break;
+		case 4:
+			writedMonth="Abril ";
+			break;
+		case 5:
+			writedMonth="Mayo ";
+			break;
+		case 6:
+			writedMonth="Junio ";
+			break;
+		case 7:
+			writedMonth="Julio ";
+			break;
+		case 8: 
+			writedMonth="Agosto ";
+			break;
+		case 9:
+			writedMonth="Septiembre ";
+			break;
+		case 10: 
+			writedMonth="Octubre ";
+			break;
+		case 11:
+			writedMonth="Noviembre ";
+			break;
+		case 12:
+			writedMonth="Diciembre ";
+			break;
+			default:
+				writedMonth="El mes introducido no es correcto";
+				break;	
+		}
+		return writedMonth;
+	}
+public int checkMonth() {
+		
+		int corectMonth;
+		
+		switch(this.month) {
+		case 1://next
+		case 3://next
+		case 5://next
+		case 7://next
+		case 8://next
+		case 10://next
+		case 12:
+			if(this.day<=31 && this.day>0) {
+			corectMonth=31;
+			}else {
+				corectMonth=0;
+			}
+			break;
+		case 4://next
+		case 6://next
+		case 9://next
+		case 11:
+			if(this.day<=30 && this.day>0) {
+				corectMonth=30;
+				}else {
+					corectMonth=0;
+				}
+			break;
+		case 2:
+			if(this.day<=28 && this.day>0) {
+				corectMonth=28;
+				}else {
+					corectMonth=0;
+				}
+			break;
+			default:
+				corectMonth=0;
+		}
+		return corectMonth;
+	}
+	/*PREGUNTAR EN CLASE
 	public String checkMonth() {
 		
 		String corectMonth;
@@ -169,6 +257,7 @@ public class Date {
 		}
 		return corectMonth;
 	}
+	*/
 	
 	public String getSeason() {
 		
@@ -176,7 +265,6 @@ public class Date {
 		
 		switch(this.month) {
 		
-		//Primavera
 		case 3:
 			if(this.day>=22) {//Equinocio de privamera
 				season="Primavera";
@@ -225,6 +313,29 @@ public class Date {
 				break;	
 		}	
 		return season;
+	} 
+	
+	public String getMonthsEndYear() {
+		
+		StringBuilder tooEnd = new StringBuilder();
+		
+		for(int i=this.month + 1;i<=12;i++) {
+			
+			tooEnd.append(getMonth(i));
+		}
+		return tooEnd.toString();
+	}
+	
+	public String getsDatesEndMonth() {
+		
+		StringBuilder missingDates = new StringBuilder();
+		
+		for(int i=this.day+1;i<=checkMonth();i++) {
+			
+			missingDates.append(i+"/"+this.month+"/"+this.year+" ");
+		}
+		return missingDates.toString();
+		
 	}
 	
 	
