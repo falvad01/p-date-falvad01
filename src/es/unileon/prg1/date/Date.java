@@ -1,4 +1,4 @@
-package es.unileon.prg1;
+package es.unileon.prg1.date;
 
 /**
  * 
@@ -16,123 +16,121 @@ public class Date {
 	private int month;
 	private int year;
 	
+	public Date() { //COntructor para cuando no se pasan parametros
+		this.day=1;
+		this.month=1;
+		this.year=2018;
+	}
+	
 	/**
 	 * 
 	 * @param day
 	 * @param month
 	 * @param year
 	 */
-	public Date(int day, int month, int year) {
-		
-		this.day = day;
-		this.month = month;
+	public Date(int day, int month, int year)throws DateException {//Constructor para parametros
 		this.year = year;	
+		
+		this.month = month;
+		if(month < 1 || month > 12) {
+			throw new DateException("Mes " + month + "No valido, valores posibles entre 1 y 12");
+		} else {
+			this.month = month;
+		}
+		this.day = day;
+		
+		
 	}
 	
 	public String toString() {
 		StringBuffer output = new StringBuffer();
 		output.append(day+"/"+month+"/"+year);
-		
-
 		return day + "/" + month + "/" + year;
 	}
 	
-	public boolean isSameDay(int newDay) {
-		boolean sameDay;
-		if(this.day==newDay) {
-			sameDay=true;
-		}else {
-			sameDay=false;
-		}
-		
-		return sameDay;
+	public int getYear(){
+		return this.year;
 	}
 	
-	public boolean isSameMonth(int newMonth) {
-		boolean sameMonth;
-		if(this.month==newMonth) {
-			sameMonth=true;
-		}else {
-			sameMonth=false;
-		}
-		return sameMonth;
+	public int getMonth() {
+		return this.month;
+	}
+	public int getDay() {
+		return this.day;
 	}
 	
-	public boolean isSameYear(int newYear) {
-		boolean sameYear;
-		if(this.year==newYear) {
-			sameYear=true;
-		}else {
-			sameYear=false;
+	public boolean isSameDayIf(Date otherDate) {
+		if ( this.day == otherDate.getDay() ){
+			return true;
 		}
-		return sameYear;
+		return false;
 	}
 	
-	public String isSame(int newDay, int newMonth, int newYear) {
+	public boolean isSameMonthIf(Date otherDate) {
+		if ( this.month == otherDate.getMonth() ){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isSameYearIf(Date otherDate) {
 		
-		String outSentence;
+		if ( this.year == otherDate.getYear() ){
+			return true;
+		}
+		return false;
+	}	
+	
+	public boolean isSameIf(Date otherDate) {
 		
-		if(day==newDay && month==newMonth && year==newYear) {
-			outSentence=("La fecha es la misma");
+		boolean sameDate;
+		
+		if(this.day==otherDate.getYear() && this.month==otherDate.getYear() && this.year==otherDate.getYear()) {
+			return true;
 		}else {
-				outSentence=("Las fechas no coinciden");
+				return false;
 			}
-		return outSentence;
 		}
+	
+	public boolean isSameDay(Date otherDate) {
+		boolean same;
+		
+		same=this.day==otherDate.getDay();
+		
+		return same;
+		
+	}
+	
+	public boolean isSameMonth(Date otherDate) {
+		boolean same;
+		
+		same=this.month==otherDate.getMonth();
+		
+		return same;
+	}
+	
+	public boolean isSameYear(Date otherDate) {
+		boolean same;
+		
+		same=this.year==otherDate.getYear();
+		
+		return same;
+		
+	}	
+	
+	public boolean isSame(Date otherDate) {
+		boolean same;
+		same =this.day==otherDate.getYear() && this.month==otherDate.getYear() && this.year==otherDate.getYear();
+		
+		return same;
+	}
+	
+	
 	public String getMonthName() {
 		
 		String writedMonth;
 		
 		switch(this.month) {
-		
-		case 1:
-			writedMonth="Enero";
-			break;
-		case 2:
-			writedMonth="Febrero";
-			break;
-		case 3:
-			writedMonth="Marzo";
-			break;
-		case 4:
-			writedMonth="Abril";
-			break;
-		case 5:
-			writedMonth="Mayo";
-			break;
-		case 6:
-			writedMonth="Junio";
-			break;
-		case 7:
-			writedMonth="Julio";
-			break;
-		case 8: 
-			writedMonth="Agosto";
-			break;
-		case 9:
-			writedMonth="Septiembre";
-			break;
-		case 10: 
-			writedMonth="Octubre";
-			break;
-		case 11:
-			writedMonth="Noviembre";
-			break;
-		case 12:
-			writedMonth="Diciembre";
-			break;
-			default:
-				writedMonth="El mes introducido no es correcto";
-				break;	
-		}
-		return writedMonth;
-	}
-		
-	public String getMonth(int i) {
-		
-		String writedMonth;
-		
-		switch(i) {
 		
 		case 1:
 			writedMonth="Enero ";
@@ -176,7 +174,8 @@ public class Date {
 		}
 		return writedMonth;
 	}
-public int checkMonth() {
+	
+public int isDayRightAux() {
 		
 		int corectMonth;
 		
@@ -216,50 +215,50 @@ public int checkMonth() {
 		}
 		return corectMonth;
 	}
-	/*PREGUNTAR EN CLASE
-	public String checkMonth() {
-		
-		String corectMonth;
-		
-		switch(this.month) {
-		case 1://next
-		case 3://next
-		case 5://next
-		case 7://next
-		case 8://next
-		case 10://next
-		case 12:
-			if(this.day<=31 && this.day>0) {
-			corectMonth="El mes es de 31 dias y es correcto";
-			}else {
-				corectMonth="El mes deberia de tener 31 dias";
-			}
-			break;
-		case 4://next
-		case 6://next
-		case 9://next
-		case 11:
-			if(this.day<=30 && this.day>0) {
-				corectMonth="El mes es de 30 dias y es correcto";
-				}else {
-					corectMonth="El mes deberia de tener 30 dias";
-				}
-			break;
-		case 2:
-			if(this.day<=28 && this.day>0) {
-				corectMonth="El mes es de 28 dias y es correcto";
-				}else {
-					corectMonth="El mes deberia de tener 28 dias";
-				}
-			break;
-			default:
-				corectMonth="No existe ese mes";
-		}
-		return corectMonth;
-	}
-	*/
+
+public boolean isDayRight() {
 	
-	public String getSeason() {
+	boolean corectMonth;
+	
+	switch(this.month) {
+	case 1://next
+	case 3://next
+	case 5://next
+	case 7://next
+	case 8://next
+	case 10://next
+	case 12:
+		if(this.day<=31 && this.day>0) {
+		corectMonth=true;
+		}else {
+			corectMonth=false;
+		}
+		break;
+	case 4://next
+	case 6://next
+	case 9://next
+	case 11:
+		if(this.day<=30 && this.day>0) {
+			corectMonth=true;
+			}else {
+				corectMonth=false;
+			}
+		break;
+	case 2:
+		if(this.day<=28 && this.day>0) {
+			corectMonth=true;
+			}else {
+				corectMonth=false;
+			}
+		break;
+		default:
+			corectMonth=false;
+	}
+	return corectMonth;
+}
+	
+	
+	public String getSeasonName() {
 		
 		String season;
 		
@@ -276,7 +275,7 @@ public int checkMonth() {
 		case 5:
 			season="Primavera";
 			break;
-		case 6://next
+		case 6:
 			if(this.day<=21) { //Solsticio de verano
 				season="Primavera";
 			}else {
@@ -321,20 +320,31 @@ public int checkMonth() {
 		
 		for(int i=this.month + 1;i<=12;i++) {
 			
-			tooEnd.append(getMonth(i));
+			Date today=new Date(1,i,2018);
+			tooEnd.append(today.getMonthName());
 		}
 		return tooEnd.toString();
 	}
 	
-	public String getsDatesEndMonth() {
+	public String getDaysLeftOfMonth() {
 		
 		StringBuilder missingDates = new StringBuilder();
 		
-		for(int i=this.day+1;i<=checkMonth();i++) {
+		for(int i=this.day+1;i<=isDayRightAux();i++) {
 			
 			missingDates.append(i+"/"+this.month+"/"+this.year+" ");
 		}
 		return missingDates.toString();
+		
+	}
+	
+	public void sameDays() {
+		
+		for(int i=0;i<12;i++) {
+			
+			
+			
+		}
 		
 	}
 	
